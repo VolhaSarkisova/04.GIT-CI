@@ -2,11 +2,15 @@ name: Hello GitHub Actions
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
-  say-hello-windows:
-    runs-on: windows-latest
+  say-hello:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
     
     steps:
       - name: Checkout code
@@ -14,5 +18,29 @@ jobs:
       
       - name: Run Python script
         run: python hello.py
-        shell: cmd
+        
+      - name: Show OS info (опционально)
+        run: |
+          if [ "${{ runner.os }}" == "Windows" ]; then
+            echo "Running on Windows"
+          else
+            echo "Running on ${{ runner.os }}"
+          fi
+        shell: bash
+
+
+
+
+
+
+
+
+    
+
+
+
+     
+
+
+
  
