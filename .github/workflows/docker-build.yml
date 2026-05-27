@@ -51,7 +51,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          push: false
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
@@ -63,7 +63,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "✅ *Docker build succeeded!*\nImage: `${{ steps.meta.outputs.tags }}`\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nTriggered by: ${{ github.actor }}"
+              "text": "✅ Docker build succeeded!\nImage: ${{ steps.meta.outputs.tags }}\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nTriggered by: ${{ github.actor }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
@@ -74,7 +74,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "❌ *Docker build failed!*\nImage: `${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}`\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nCheck logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "text": "❌ Docker build failed!\nImage: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nCheck logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
