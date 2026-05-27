@@ -63,7 +63,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "✅ Docker build succeeded!\nImage: ${{ steps.meta.outputs.tags }}\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref_name }}\nTriggered by: ${{ github.actor }}"
+              "text": "✅ Docker build succeeded!"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
